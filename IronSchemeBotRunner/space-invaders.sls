@@ -26,6 +26,8 @@
     player-can-build-missile-controller?
     player-can-build-alien-factory?
     player-ship
+    player-missiles
+    player-missile-count
 
     entity-type
     entity-x
@@ -42,8 +44,10 @@
     (ironscheme clr))
 
 (clr-reference SpaceInvaders)
+
 (clr-using SpaceInvaders.Core)
 (clr-using SpaceInvaders.Entities)
+(clr-using IronScheme.Runtime)
 
 (define $match #f)
 (define $map #f)
@@ -141,6 +145,13 @@
   (let ((shp (clr-prop-get Player Ship p)))
     (and (not (null? shp))
          shp)))
+
+(define (player-missiles p)
+  (clr-static-call Cons FromList
+    (clr-prop-get Player Missiles p)))
+
+(define (player-missile-count p)
+  (length (player-missiles p)))
 
 ; entity procedures
 (define (entity-type e)
