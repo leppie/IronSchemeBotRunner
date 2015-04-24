@@ -22,7 +22,7 @@
     player-has-missile-controller?
     player-has-alien-factory?
     player-respawn-timer
-    player-last-command
+    player-command-feedback
     player-can-build-missile-controller?
     player-can-build-alien-factory?
     player-ship
@@ -127,11 +127,11 @@
 (define (player-respawn-timer p)
   (clr-prop-get Player RespawnTimer p))
 
-(define (player-last-command p)
+(define (player-command-feedback p)
   (let ((shp (player-ship p)))
     (if shp
-        (clr-prop-get Ship LastCommand shp)
-        'Nothing)))
+        (clr-prop-get Ship CommandFeedback shp)
+        #f)))
 
 (define (player-can-build-missile-controller? p)
   (and (not (player-has-missile-controller? p))
